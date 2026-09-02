@@ -38,7 +38,7 @@ python -m pytest
 | Variable | Required | Purpose |
 |---|---|---|
 | `GEMINI_API_KEY` | No | Enables the single structured LLM call per eligible candidate (AI project-depth judgment + summary). Without it, scoring is 100% deterministic. |
-| `GEMINI_MODEL` | No | Defaults to `gemini-2.5-flash`. |
+| `GEMINI_MODEL` | No | Defaults to `gemini-3.5-flash-lite`. |
 | `GITHUB_TOKEN` | No | Raises the GitHub API rate limit from 60/hr to 5000/hr. GitHub enrichment works fine without it for a single run over ~50 resumes. |
 
 No credentials are ever hard-coded; see `.env.example`.
