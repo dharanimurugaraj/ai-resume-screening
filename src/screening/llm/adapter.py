@@ -32,8 +32,12 @@ def _get_client():
         return _client
     try:
         from google import genai
+        from google.genai import types
 
-        _client = genai.Client(api_key=settings.gemini_api_key)
+        _client = genai.Client(
+            api_key=settings.gemini_api_key,
+            http_options=types.HttpOptions(timeout=settings.llm_request_timeout_ms),
+        )
     except Exception:
         logger.warning("Gemini client could not be initialized", exc_info=True)
         _client_init_failed = True
