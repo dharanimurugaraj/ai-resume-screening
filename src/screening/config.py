@@ -41,11 +41,14 @@ class Settings:
         default_factory=lambda: os.environ.get("GEMINI_API_KEY")
     )
     gemini_model: str = field(
-        default_factory=lambda: os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+        default_factory=lambda: os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
     )
     llm_enabled: bool = field(
         default_factory=lambda: bool(os.environ.get("GEMINI_API_KEY"))
     )
+    # Bounded so a stalled call fails fast (see llm/adapter.py) instead of
+    # hanging the batch far longer than a graceful failure should take.
+    llm_request_timeout_ms: int = 30_000
 
     github_token: str | None = field(
         default_factory=lambda: os.environ.get("GITHUB_TOKEN")
